@@ -9,7 +9,8 @@ namespace topic_1_5
     enum Screen
     {
         Intro,
-        game
+        game,
+        end
         
     }
     public class Game1 : Game
@@ -42,6 +43,9 @@ namespace topic_1_5
         SoundEffectInstance dirtbikeInstance;
 
         float rotation;
+        float seconds;
+
+        bool done;
 
         public Game1()
         {
@@ -65,6 +69,10 @@ namespace topic_1_5
             screen = Screen.Intro;
 
             base.Initialize();
+
+            seconds = 0;
+
+            done = false;
         }
 
         protected override void LoadContent()
@@ -81,7 +89,7 @@ namespace topic_1_5
 
             motorampTexture = Content.Load<Texture2D>("motoramp");
 
-            dirtbikeSound = Content.Load<SoundEffect>("dirtbikesound");
+            dirtbikeSound = Content.Load<SoundEffect>("motosoundedited");
             dirtbikeInstance = dirtbikeSound.CreateInstance();
 
             // TODO: use this.Content to load your game content here
@@ -97,257 +105,265 @@ namespace topic_1_5
 
             this.Window.Title = $"x = {mouseState.X}, y = {mouseState.Y}";
 
-
-            if (keyboardstate.IsKeyDown(Keys.Enter))
-            {
+            if(keyboardstate.IsKeyDown(Keys.Enter))
                 screen = Screen.game;
-                bikeriderRect.X += 2;
-                dirtbikeInstance.Play();
-                dirtbikeInstance.Resume();
 
-                if (keyboardstate.IsKeyDown(Keys.Space))
+            if (screen == Screen.game)
+            {
+
+                if (!done)
+                    seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (seconds >= 0)
                 {
-                    rotation = -0.4f;
-                    bikeriderRect.Y = 380;
+                    bikeriderRect.X += 2;
+                    dirtbikeInstance.Play();
+
+
+                    if (seconds >= 0.5)
+                    {
+                        rotation = -0.4f;
+                        bikeriderRect.Y = 380;
+                    }
+
+                    if (seconds >= 1.5)
+                    {
+                        rotation = 0.3f;
+                        bikeriderRect.Y = 400;
+                    }
+                    if(dirtbikeInstance.State == SoundState.Stopped)
+                        screen = Screen.end;
                 }
 
-                if (previusstate.IsKeyUp(Keys.Space))
+
+
+
+
+
+
+                if (bikeriderRect.X >= 350)
                 {
                     rotation = 0.3f;
                     bikeriderRect.Y = 400;
                 }
-            }
+
+                if (bikeriderRect.X >= 355)
+                {
+                    rotation = 0.2f;
+                    bikeriderRect.Y = 397;
+                }
 
 
+                if (bikeriderRect.X >= 360)
+                {
+                    rotation = -0.0f;
+                    bikeriderRect.Y = 394;
+                }
 
+                if (bikeriderRect.X >= 365)
+                {
+                    rotation = -0.1f;
+                    bikeriderRect.Y = 390;
+                }
 
+                if (bikeriderRect.X >= 380)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 389;
+                }
 
-            if (keyboardstate.IsKeyUp(Keys.Enter))
-            {
-                dirtbikeInstance.Pause();
-            }
+                if (bikeriderRect.X >= 390)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 388;
+                }
 
-            if (bikeriderRect.X >= 350)
-            {
-                rotation = 0.3f;
-                bikeriderRect.Y = 400;
-            }
+                if (bikeriderRect.X >= 400)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 382;
+                }
 
-            if (bikeriderRect.X >= 355)
-            {
-                rotation = 0.2f;
-                bikeriderRect.Y = 397;
-            }
+                if (bikeriderRect.X >= 415)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 375;
+                }
 
+                if (bikeriderRect.X >= 425)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 368;
+                }
 
-            if (bikeriderRect.X >= 360)
-            {
-                rotation = -0.0f;
-                bikeriderRect.Y = 394;
-            }
+                if (bikeriderRect.X >= 430)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 365;
+                }
 
-            if (bikeriderRect.X >= 365)
-            {
-                rotation = -0.1f;
-                bikeriderRect.Y = 390;
-            }
+                if (bikeriderRect.X >= 445)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 358;
+                }
 
-            if (bikeriderRect.X >= 380)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 389;
-            }
+                if (bikeriderRect.X >= 450)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 350;
+                }
 
-            if (bikeriderRect.X >= 390)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 388;
-            }
+                if (bikeriderRect.X >= 468)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 344;
+                }
 
-            if (bikeriderRect.X >= 400)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 382;
-            }
+                if (bikeriderRect.X >= 475)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 335;
+                }
 
-            if (bikeriderRect.X >= 415)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 375;
-            }
+                if (bikeriderRect.X >= 480)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 325;
+                }
 
-            if (bikeriderRect.X >= 425)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 368;
-            }
+                if (bikeriderRect.X >= 490)
+                {
+                    rotation = -0.2f;
+                    bikeriderRect.Y = 315;
+                }
 
-            if (bikeriderRect.X >= 430)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 365;
-            }
+                if (bikeriderRect.X >= 500)
+                {
+                    rotation = -0.15f;
+                    bikeriderRect.Y = 310;
+                }
 
-            if (bikeriderRect.X >= 445)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 358;
-            }
+                if (bikeriderRect.X >= 510)
+                {
+                    rotation = -0.05f;
+                    bikeriderRect.Y = 305;
+                }
 
-            if (bikeriderRect.X >= 450)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 350;
-            }
+                if (bikeriderRect.X >= 520)
+                {
+                    rotation = 0.05f;
+                    bikeriderRect.Y = 295;
+                }
 
-            if (bikeriderRect.X >= 468)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 344;
-            }
+                if (bikeriderRect.X >= 525)
+                {
+                    rotation = 0.1f;
+                    bikeriderRect.Y = 292;
+                }
 
-            if (bikeriderRect.X >= 475)
-            { 
-                rotation = -0.2f;
-                bikeriderRect.Y = 335;
-            }
+                if (bikeriderRect.X >= 535)
+                {
+                    rotation = 0.15f;
+                    bikeriderRect.Y = 290;
+                }
 
-            if (bikeriderRect.X >= 480)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 325;
-            }
+                if (bikeriderRect.X >= 545)
+                {
+                    rotation = 0.22f;
+                    bikeriderRect.Y = 288;
+                }
 
-            if (bikeriderRect.X >= 490)
-            {
-                rotation = -0.2f;
-                bikeriderRect.Y = 315;
-            }
+                if (bikeriderRect.X >= 555)
+                {
+                    rotation = 0.25f;
+                    bikeriderRect.Y = 290;
+                }
 
-            if (bikeriderRect.X >= 500)
-            {
-                rotation = -0.15f;
-                bikeriderRect.Y = 310;
-            }
+                if (bikeriderRect.X >= 565)
+                {
+                    rotation = 0.25f;
+                    bikeriderRect.Y = 290;
+                }
 
-            if (bikeriderRect.X >= 510)
-            {
-                rotation = -0.05f;
-                bikeriderRect.Y = 305;
-            }
+                if (bikeriderRect.X >= 570)
+                {
+                    rotation = 0.25f;
+                    bikeriderRect.Y = 290;
+                }
 
-            if (bikeriderRect.X >= 520)
-            {
-                rotation = 0.05f;
-                bikeriderRect.Y = 295;
-            }
+                if (bikeriderRect.X >= 575)
+                {
+                    rotation = 0.3f;
+                    bikeriderRect.Y = 295;
+                }
 
-            if (bikeriderRect.X >= 525)
-            {
-                rotation = 0.1f;
-                bikeriderRect.Y = 292;
-            }
+                if (bikeriderRect.X >= 585)
+                {
+                    rotation = 0.4f;
+                    bikeriderRect.Y = 310;
+                }
 
-            if (bikeriderRect.X >= 535)
-            {
-                rotation = 0.15f;
-                bikeriderRect.Y = 290;
-            }
+                if (bikeriderRect.X >= 595)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 320;
+                }
 
-            if (bikeriderRect.X >= 545)
-            {
-                rotation = 0.22f;
-                bikeriderRect.Y = 288;
-            }
+                if (bikeriderRect.X >= 605)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 330;
+                }
 
-            if (bikeriderRect.X >= 555)
-            {
-                rotation = 0.25f;
-                bikeriderRect.Y = 290;
-            }
+                if (bikeriderRect.X >= 620)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 340;
+                }
 
-            if (bikeriderRect.X >= 565)
-            {
-                rotation = 0.25f;
-                bikeriderRect.Y = 290;
-            }
+                if (bikeriderRect.X >= 630)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 350;
+                }
 
-            if (bikeriderRect.X >= 570)
-            {
-                rotation = 0.25f;
-                bikeriderRect.Y = 290;
-            }
+                if (bikeriderRect.X >= 640)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 360;
+                }
 
-            if (bikeriderRect.X >= 575)
-            {
-                rotation = 0.3f;
-                bikeriderRect.Y = 295;
-            }
+                if (bikeriderRect.X >= 650)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 360;
+                }
 
-            if (bikeriderRect.X >= 585)
-            {
-                rotation = 0.4f;
-                bikeriderRect.Y = 310;
-            }
+                if (bikeriderRect.X >= 665)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 370;
+                }
 
-            if (bikeriderRect.X >= 595)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 320;
-            }
+                if (bikeriderRect.X >= 675)
+                {
+                    rotation = 0.5f;
+                    bikeriderRect.Y = 380;
+                }
 
-            if (bikeriderRect.X >= 605)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 330;
-            }
+                if (bikeriderRect.X >= 690)
+                {
+                    rotation = 0.4f;
+                    bikeriderRect.Y = 390;
+                }
 
-            if (bikeriderRect.X >= 620)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 340;
-            }
+                if (bikeriderRect.X >= 705)
+                {
+                    rotation = 0.3f;
+                    bikeriderRect.Y = 400;
+                }
 
-            if (bikeriderRect.X >= 630)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 350;
-            }
-
-            if (bikeriderRect.X >= 640)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 360;
-            }
-
-            if (bikeriderRect.X >= 650)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 360;
-            }
-
-            if (bikeriderRect.X >= 665)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 370;
-            }
-
-            if (bikeriderRect.X >= 675)
-            {
-                rotation = 0.5f;
-                bikeriderRect.Y = 380;
-            }
-
-            if (bikeriderRect.X >= 690)
-            {
-                rotation = 0.4f;
-                bikeriderRect.Y = 390;
-            }
-
-            if (bikeriderRect.X >= 705)
-            {
-                rotation = 0.3f;
-                bikeriderRect.Y = 400;
             }
             // TODO: Add your update logic here
 

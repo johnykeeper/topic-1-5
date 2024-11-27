@@ -37,12 +37,6 @@
 /processorParam:TextureFormat=Color
 /build:Desert.png
 
-#begin dirtbikesound.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:dirtbikesound.mp3
-
 #begin Intro.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -66,6 +60,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:motoramp.png
+
+#begin motosoundedited.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:motosoundedited.wav
 
 #begin TextFont.spritefont
 /importer:FontDescriptionImporter
