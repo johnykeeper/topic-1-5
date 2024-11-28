@@ -46,6 +46,8 @@ namespace topic_1_5
         float seconds;
 
         bool done;
+        bool stop;
+        bool rotate;
 
         public Game1()
         {
@@ -73,6 +75,8 @@ namespace topic_1_5
             seconds = 0;
 
             done = false;
+            stop = true;
+            rotate = false;
         }
 
         protected override void LoadContent()
@@ -114,9 +118,13 @@ namespace topic_1_5
                 if (!done)
                     seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (seconds >= 0)
+                if (bikeriderRect.X >= 300)
                 {
-                    bikeriderRect.X += 2;
+                    stop = false;
+                }
+
+                if (stop)
+                {
                     dirtbikeInstance.Play();
 
 
@@ -131,238 +139,54 @@ namespace topic_1_5
                         rotation = 0.3f;
                         bikeriderRect.Y = 400;
                     }
-                    if(dirtbikeInstance.State == SoundState.Stopped)
-                        screen = Screen.end;
+                    
                 }
 
+                if(seconds >= 0)
+                {
+                    bikeriderRect.X += 2;
+                }
 
+                if (bikeriderRect.X >= 750)
+                {
+                   
+                    
 
+                }
 
+                else if (bikeriderRect.X >= 560)
+                {
+                    rotation -= 0.036f;
+                    bikeriderRect.Y += 1;
 
+                }
+                else if (bikeriderRect.X >= 450)
+                {
+                    rotation -= 0.036f;
+                    bikeriderRect.Y += -1;
 
+                }
 
-                if (bikeriderRect.X >= 350)
+                else if (bikeriderRect.X >= 365 )
+                {
+                    bikeriderRect.Y += -1;
+                    rotation -= 0.02f;
+                }
+                
+                
+                
+                if (rotation >= 0.3f)
                 {
                     rotation = 0.3f;
-                    bikeriderRect.Y = 400;
                 }
 
-                if (bikeriderRect.X >= 355)
-                {
-                    rotation = 0.2f;
-                    bikeriderRect.Y = 397;
-                }
+                if (dirtbikeInstance.State == SoundState.Stopped)
+                    screen = Screen.end;
 
 
-                if (bikeriderRect.X >= 360)
-                {
-                    rotation = -0.0f;
-                    bikeriderRect.Y = 394;
-                }
 
-                if (bikeriderRect.X >= 365)
-                {
-                    rotation = -0.1f;
-                    bikeriderRect.Y = 390;
-                }
 
-                if (bikeriderRect.X >= 380)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 389;
-                }
-
-                if (bikeriderRect.X >= 390)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 388;
-                }
-
-                if (bikeriderRect.X >= 400)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 382;
-                }
-
-                if (bikeriderRect.X >= 415)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 375;
-                }
-
-                if (bikeriderRect.X >= 425)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 368;
-                }
-
-                if (bikeriderRect.X >= 430)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 365;
-                }
-
-                if (bikeriderRect.X >= 445)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 358;
-                }
-
-                if (bikeriderRect.X >= 450)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 350;
-                }
-
-                if (bikeriderRect.X >= 468)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 344;
-                }
-
-                if (bikeriderRect.X >= 475)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 335;
-                }
-
-                if (bikeriderRect.X >= 480)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 325;
-                }
-
-                if (bikeriderRect.X >= 490)
-                {
-                    rotation = -0.2f;
-                    bikeriderRect.Y = 315;
-                }
-
-                if (bikeriderRect.X >= 500)
-                {
-                    rotation = -0.15f;
-                    bikeriderRect.Y = 310;
-                }
-
-                if (bikeriderRect.X >= 510)
-                {
-                    rotation = -0.05f;
-                    bikeriderRect.Y = 305;
-                }
-
-                if (bikeriderRect.X >= 520)
-                {
-                    rotation = 0.05f;
-                    bikeriderRect.Y = 295;
-                }
-
-                if (bikeriderRect.X >= 525)
-                {
-                    rotation = 0.1f;
-                    bikeriderRect.Y = 292;
-                }
-
-                if (bikeriderRect.X >= 535)
-                {
-                    rotation = 0.15f;
-                    bikeriderRect.Y = 290;
-                }
-
-                if (bikeriderRect.X >= 545)
-                {
-                    rotation = 0.22f;
-                    bikeriderRect.Y = 288;
-                }
-
-                if (bikeriderRect.X >= 555)
-                {
-                    rotation = 0.25f;
-                    bikeriderRect.Y = 290;
-                }
-
-                if (bikeriderRect.X >= 565)
-                {
-                    rotation = 0.25f;
-                    bikeriderRect.Y = 290;
-                }
-
-                if (bikeriderRect.X >= 570)
-                {
-                    rotation = 0.25f;
-                    bikeriderRect.Y = 290;
-                }
-
-                if (bikeriderRect.X >= 575)
-                {
-                    rotation = 0.3f;
-                    bikeriderRect.Y = 295;
-                }
-
-                if (bikeriderRect.X >= 585)
-                {
-                    rotation = 0.4f;
-                    bikeriderRect.Y = 310;
-                }
-
-                if (bikeriderRect.X >= 595)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 320;
-                }
-
-                if (bikeriderRect.X >= 605)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 330;
-                }
-
-                if (bikeriderRect.X >= 620)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 340;
-                }
-
-                if (bikeriderRect.X >= 630)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 350;
-                }
-
-                if (bikeriderRect.X >= 640)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 360;
-                }
-
-                if (bikeriderRect.X >= 650)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 360;
-                }
-
-                if (bikeriderRect.X >= 665)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 370;
-                }
-
-                if (bikeriderRect.X >= 675)
-                {
-                    rotation = 0.5f;
-                    bikeriderRect.Y = 380;
-                }
-
-                if (bikeriderRect.X >= 690)
-                {
-                    rotation = 0.4f;
-                    bikeriderRect.Y = 390;
-                }
-
-                if (bikeriderRect.X >= 705)
-                {
-                    rotation = 0.3f;
-                    bikeriderRect.Y = 400;
-                }
+               
 
             }
             // TODO: Add your update logic here
