@@ -158,7 +158,7 @@ namespace topic_1_5
                     bikeriderRect.X += 2;
                 }
 
-                if (bikeriderRect.X >= 750)
+                if (bikeriderRect.X >= 740)
                 {
                    
                     
