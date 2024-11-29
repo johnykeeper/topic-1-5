@@ -28,11 +28,14 @@ namespace topic_1_5
 
         Texture2D DesertTuxture;
 
+        Texture2D EndScreenTexture;
+
         Rectangle window;
 
         Screen screen;
 
         SpriteFont textfont;
+        SpriteFont EndText;
 
         KeyboardState keyboardstate;
         KeyboardState previusstate;
@@ -77,6 +80,10 @@ namespace topic_1_5
             done = false;
             stop = true;
             rotate = false;
+
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 600;
+            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
@@ -89,12 +96,16 @@ namespace topic_1_5
 
             textfont = Content.Load<SpriteFont>("TextFont");
 
+            EndText = Content.Load<SpriteFont>("EndscreenText");
+
             DesertTuxture = Content.Load<Texture2D>("Desert");
 
             motorampTexture = Content.Load<Texture2D>("motoramp");
 
             dirtbikeSound = Content.Load<SoundEffect>("motosoundedited");
             dirtbikeInstance = dirtbikeSound.CreateInstance();
+
+            EndScreenTexture = Content.Load<Texture2D>("End");
 
             // TODO: use this.Content to load your game content here
         }
@@ -156,13 +167,13 @@ namespace topic_1_5
 
                 else if (bikeriderRect.X >= 560)
                 {
-                    rotation -= 0.036f;
+                    rotation -= 0.042f;
                     bikeriderRect.Y += 1;
 
                 }
-                else if (bikeriderRect.X >= 450)
+                else if (bikeriderRect.X >= 480)
                 {
-                    rotation -= 0.036f;
+                    rotation -= 0.042f;
                     bikeriderRect.Y += -1;
 
                 }
@@ -189,6 +200,14 @@ namespace topic_1_5
                
 
             }
+
+            if (screen == Screen.end)
+            {
+                if (keyboardstate.IsKeyDown(Keys.Enter))
+                {
+                    Exit();
+                }
+            }
             // TODO: Add your update logic here
 
 
@@ -213,6 +232,11 @@ namespace topic_1_5
                 _spriteBatch.Draw(DesertTuxture, window, Color.White);
                 _spriteBatch.Draw(motorampTexture,motorampRect, Color.White);
                 _spriteBatch.Draw(bikeriderTexture, bikeriderRect, null, Color.White, rotation, new Vector2(bikeriderTexture.Width/2,bikeriderTexture.Height/2), SpriteEffects.None, 0f);
+            }
+            if (screen == Screen.end)
+            {
+                _spriteBatch.Draw(EndScreenTexture, window, Color.White);
+                _spriteBatch.DrawString(EndText, "press Enter to close", new Vector2(200,250), Color.Black);
             }
             _spriteBatch.End();
 
